@@ -8,7 +8,7 @@ import com.neonicz.training.inheritance.Vehicle;
 public class HelloWorld {
 
 	public static void main(String[] args) {
-		
+		  System.out.println("Hello World");
 		  Vehicle vehicle = new Car();
 		  
 		  if(vehicle instanceof Car) {
