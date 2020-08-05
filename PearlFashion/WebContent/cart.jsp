@@ -104,7 +104,7 @@
 						</thead>
 						<tbody>
 							<tr>
-	<%-- 							<%
+							<%
 								List<Map<String, String>> products = (List<Map<String, String>>) request.getAttribute("productDetail");
 							
 	if(products==null){
@@ -113,10 +113,10 @@
 								<% 
 	} else 
     	
-    	    products =new  ArrayList<Map<String, String>>();
+    	    
     	  
 	
-    	 
+    	 products.add("productId");
 		
 	
 	
@@ -127,9 +127,9 @@
 		 ///for (Map.Entry<String,String> product : products.entrySet())  {
 			 //products.add(new  Cart("productDetail"));
             //System.out.println("Key = " + product.getKey() + 
-                           ", Value = " + product.getValue()); 
+                          // ", Value = " + product.getValue()); 
             
-	%> --%>
+	%> 
 								<td>
 									<div class="media">
 										<div class="d-flex">
@@ -175,11 +175,12 @@
 							<tr>
 								<td></td>
 								<td></td>
-		<%-- 						<%
+								<%
+		 }
 		 }
 	
 	%>
-		 --%>						<td>
+		 					<td>
 
 									<h5>Subtotal</h5>
 								</td>
