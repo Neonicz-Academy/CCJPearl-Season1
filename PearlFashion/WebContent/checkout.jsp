@@ -1,4 +1,6 @@
 <!doctype html>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
 <html lang="en">
 
 <head>
@@ -52,11 +54,11 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active">
-										<a class="nav-link" href="index.jsp">Home</a>
+										<a class="nav-link" href="HomeProductsServlet">Home</a>
 									</li>
 								
 										<li class="nav-item">
-											<a href="cart.html" class="icons">
+											<a href="AddCartServlet" class="icons">
 												<i class="lnr lnr lnr-cart"></i>
 											</a>
 										</li>		
@@ -80,8 +82,8 @@
 				<div class="banner_content text-center">
 					<h2>Product Checkout</h2>
 					<div class="page_link">
-						<a href="index.jsp">Home</a>
-						<a href="checkout.jsp">Checkout</a>
+						<a href="HomeProductsServlet">Home</a>
+						<a href="#">Checkout</a>
 					</div>
 				</div>
 			</div>
@@ -164,12 +166,14 @@
 							</div>
 							
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="main_btn">Submit</button>
+								<button type="submit" value="submit" class="main_btn">Order</button>
 							</div>
 							
 							
 						</form>
 					</div>
+	
+					
 					<div class="col-lg-4">
 						<div class="order_box">
 							<h2>Your Order</h2>
@@ -179,6 +183,17 @@
 										<span>Total</span>
 									</a>
 								</li>
+													<%
+	List<Map<String, String>> products = (List<Map<String, String>>) request.getAttribute("productList");
+	if(products==null){
+	%>
+	   <div>
+	   No products found
+	   </div>
+	<% 
+	} else{
+		for(Map<String, String> product:products){
+	%>
 								<li>
 									<a href="#">Long Sleeve TShirt
 										<span class="middle">x 01</span>
@@ -198,6 +213,11 @@
 									</a>
 								</li>
 							</ul>
+<%
+		}
+	}
+%>
+							
 							<ul class="list list_2">
 								<li>
 									<a href="#">Subtotal

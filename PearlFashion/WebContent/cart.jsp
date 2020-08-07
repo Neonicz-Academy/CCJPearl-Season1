@@ -43,8 +43,7 @@
 				<div class="container-fluid">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<a class="navbar-brand logo_h" href="index.html">
-						<H1 style="font-style: initial; color: palevioletred;">PEARL
-							FASHION</H1>
+						<H1 style="font-style: initial; color: palevioletred">PEARL FASHION</H1>
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
@@ -60,7 +59,7 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active"><a class="nav-link"
-										href="index.jsp">Home</a></li>
+										href="HomeProductsServlet">Home</a></li>
 								</ul>
 							</div>
 
@@ -80,7 +79,7 @@
 				<div class="banner_content text-center">
 					<h2>Shopping Cart</h2>
 					<div class="page_link">
-						<a href="index.jsp">Home</a> <a href="cart.jsp">Cart</a>
+						<a href="HomeProductsServlet">Home</a> <a href="AddCartServlet">Cart</a>
 					</div>
 				</div>
 			</div>
@@ -89,7 +88,8 @@
 	<!--================End Home Banner Area =================-->
 
 	<!--================Cart Area =================-->
-	<section class="cart_area">
+	<section class="cart_area"> 
+	<form class="row login_form" action="CreateOrderServlet" method="post" id="addOrderproduct">
 		<div class="container">
 			<div class="cart_inner">
 				<div class="table-responsive">
@@ -105,30 +105,15 @@
 						<tbody>
 							<tr>
 							<%
-								List<Map<String, String>> products = (List<Map<String, String>>) request.getAttribute("productDetail");
-							
+	Map<String, String> products = (Map<String, String>) request.getAttribute("productDetail");
 	if(products==null){
 	%>
-								<div>Cart Is Empty</div>
-								<% 
-	} else 
-    	
-    	    
-    	  
-	
-    	 products.add("productId");
+	   <div>
+	   No products found
+	   </div>
+	<% 
+	} else{
 		
-	
-	
-	
-		
-    	 
-		
-		 ///for (Map.Entry<String,String> product : products.entrySet())  {
-			 //products.add(new  Cart("productDetail"));
-            //System.out.println("Key = " + product.getKey() + 
-                          // ", Value = " + product.getValue()); 
-            
 	%> 
 								<td>
 									<div class="media">
@@ -145,12 +130,13 @@
 									<h5><%= products.get("price") %></h5>
 								</td>
 								<td>
+								
 									<div class="product_count">
 										<input type="text" name="qty" id="sst" maxlength="12"
 											value="1" title="Quantity:" class="input-text qty">
 										<button
 											onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-											class="increase items-count" type="button">
+											class="increase items-count" type="submit">
 											<i class="lnr lnr-chevron-up"></i>
 										</button>
 										<button
@@ -159,9 +145,10 @@
 											<i class="lnr lnr-chevron-down"></i>
 										</button>
 									</div>
+									
 								</td>
 								<td>
-									<h5><%= products.get("price") %></h5>
+									<h5><%= products.get("total")  %></h5>
 								</td>
 							</tr>
 
@@ -175,17 +162,17 @@
 							<tr>
 								<td></td>
 								<td></td>
-								<%
-		 }
-		 }
-	
-	%>
+		<% 
+		}
+	//}
+		%>
 		 					<td>
 
 									<h5>Subtotal</h5>
 								</td>
-								<td>
-									<h5>450.00</h5>
+								<td> 
+								<!-- Long total += products.get("price"); -->
+									<h5><%= products.get("subTotal") %></h5>
 								</td>
 							</tr>
 
@@ -196,8 +183,8 @@
 
 								<td>
 									<div class="checkout_btn_inner">
-										<a class="gray_btn" href="Index.jsp">Continue Shopping</a> <a
-											class="main_btn" href="checkout.jsp">Proceed to checkout</a>
+										<a class="gray_btn" href="Index.jsp">Continue Shopping</a> 
+											<input type="submit" value="Proceed To CheckOut" class="btn submit_btn"></input>
 									</div>
 								</td>
 							</tr>
@@ -207,6 +194,7 @@
 
 			</div>
 		</div>
+		</form>
 	</section>
 	<!--================End Cart Area =================-->
 
@@ -272,6 +260,7 @@
 	<script src="vendors/counter-up/jquery.waypoints.min.js"></script>
 	<script src="vendors/counter-up/jquery.counterup.js"></script>
 	<script src="js/theme.js"></script>
+	<script src="assets/js/script.js" async></script>
 </body>
 
 </html>

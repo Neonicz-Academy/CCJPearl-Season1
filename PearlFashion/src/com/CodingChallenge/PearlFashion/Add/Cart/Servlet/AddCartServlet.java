@@ -1,5 +1,6 @@
 package com.CodingChallenge.PearlFashion.Add.Cart.Servlet;
 
+import java.awt.event.ItemEvent;
 import java.awt.image.DataBufferUShort;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,6 +27,7 @@ import com.CodingChallenge.PearlFashion.Add.Cart.Repositories.AddCartRepository;
 import com.CodingChallenge.PearlFashion.Add.Product.Repositories.AddProductRepository;
 import com.CodingChallenge.PearlFashion.Home.Products.Repositories.HomeProductRepository;
 import com.CodingChallenge.PearlFashion.Product.Detail.Repositories.ProductDetailRepository;
+import com.mysql.cj.Session;
 
 /**
  * Servlet implementation class AddCartServlet
@@ -59,9 +61,9 @@ public class AddCartServlet extends HttpServlet {
 		Map<String,String> productDetail = productRepository.selectProduct(productId);
 		request.setAttribute("productDetail", productDetail);
 	       dispatcher.forward(request, response);
-	} 
+	
 	       
-	          
+	}
 	  
 	
 	/**
@@ -71,12 +73,12 @@ public class AddCartServlet extends HttpServlet {
 		    @Override
 		    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		    		doGet(request, response);
-		    	
-		    	}
-		    	
+		  	
+		doGet(request, response);
 
-		    }		     
+		    }	
+		    }
+		    
 		    
 		    
 		        

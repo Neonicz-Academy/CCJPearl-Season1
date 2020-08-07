@@ -1,4 +1,7 @@
 <!doctype html>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+
 <html lang="en">
 
 <head>
@@ -8,17 +11,17 @@
 	<link rel="icon" href="img/favicon.png" type="image/png">
 	<title>Pearl Fashion</title>
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="vendors/linericon/style.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-	<link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
-	<link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
-	<link rel="stylesheet" href="vendors/animate-css/animate.css">
-	<link rel="stylesheet" href="vendors/jquery-ui/jquery-ui.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/vendors/linericon/style.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/vendors/owl-carousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="assets/vendors/lightbox/simpleLightbox.css">
+	<link rel="stylesheet" href="assets/vendors/nice-select/css/nice-select.css">
+	<link rel="stylesheet" href="assets/vendors/animate-css/animate.css">
+	<link rel="stylesheet" href="assets/vendors/jquery-ui/jquery-ui.css">
 	<!-- main css -->
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 
 <body>
@@ -52,26 +55,11 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active">
-										<a class="nav-link" href="index.html">Home</a>
+										<a class="nav-link" href="HomeProductsServlet">Home</a>
 									</li>
-									<!--<li class="nav-item submenu dropdown">
-										<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
-										<ul class="dropdown-menu">
-											
-												<li class="nav-item">
-													<a class="nav-link" href="single-product.html">Product Details</a>
-													<li class="nav-item">
-														<a class="nav-link" href="checkout.html">Product Checkout</a>
-														<li class="nav-item">
-															<a class="nav-link" href="cart.html">Shopping Cart</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" href="confirmation.html">Confirmation</a>
-														</li>
-										</ul>
-										</li>-->
+									
 										<li class="nav-item">
-											<a href="cart.html" class="icons">
+											<a href="AddCartServlet" class="icons">
 												<i class="lnr lnr lnr-cart"></i>
 											</a>
 										</li>
@@ -96,7 +84,7 @@
 				<div class="banner_content text-center">
 					<h2>Order Confirmation</h2>
 					<div class="page_link">
-						<a href="index.html">Home</a>
+						<a href="HomeProductsServlet">Home</a>
 						<a href="confirmation.html">Confirmation</a>
 					</div>
 				</div>
@@ -110,6 +98,7 @@
 		<div class="container">
 			<h3 class="title_confirmation">Thank you. Your order has been received.</h3>
 			<div class="row order_d_inner">
+	
 				<div class="col-lg-4">
 					<div class="details_item">
 						<h4>Order Info</h4>
@@ -179,6 +168,7 @@
 						</ul>
 					</div>
 				</div>
+		
 			</div>
 			<div class="order_details_table">
 				<h2>Order Details</h2>
@@ -191,9 +181,35 @@
 								<th scope="col">Total</th>
 							</tr>
 						</thead>
+	<%
+	List<Map<String, String>> products = (List<Map<String, String>>) request.getAttribute("productList");
+	if(products==null){
+	%>
+	   <div>
+	   No products found
+	   </div>
+	<% 
+	} else{
+		for(Map<String, String> product:products){
+	%>
 						<tbody>
 							<tr>
 								<td>
+									<p><%=  product.get("productName") %></p>
+								</td>
+								<td>
+									<h5>x1 </h5>
+								</td>
+								<td>
+									<p><%= product.get("price") %></p>
+								</td>
+							</tr>
+<%
+		}
+	}
+%>
+							<!-- <tr>
+								<td>
 									<p>Long Sleeve TShirt</p>
 								</td>
 								<td>
@@ -213,18 +229,7 @@
 								<td>
 									<p>150.00</p>
 								</td>
-							</tr>
-							<tr>
-								<td>
-									<p>Long Sleeve TShirt</p>
-								</td>
-								<td>
-									<h5>x 01</h5>
-								</td>
-								<td>
-									<p>150.00</p>
-								</td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td>
 									<h4>Subtotal</h4>
@@ -257,6 +262,7 @@
 								</td>
 							</tr>
 						</tbody>
+	
 					</table>
 				</div>
 			</div>
@@ -303,21 +309,21 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/popper.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/lightbox/simpleLightbox.min.js"></script>
-	<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-	<script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-	<script src="vendors/isotope/isotope-min.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="vendors/jquery-ui/jquery-ui.js"></script>
-	<script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendors/counter-up/jquery.counterup.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="assets/js/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/popper.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/stellar.js"></script>
+	<script src="assets/vendors/lightbox/simpleLightbox.min.js"></script>
+	<script src="assets/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="assets/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+	<script src="assets/vendors/isotope/isotope-min.js"></script>
+	<script src="assets/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="assets/js/jquery.ajaxchimp.min.js"></script>
+	<script src="assets/js/mail-script.js"></script>
+	<script src="assets/vendors/jquery-ui/jquery-ui.js"></script>
+	<script src="assets/vendors/counter-up/jquery.waypoints.min.js"></script>
+	<script src="assets/vendors/counter-up/jquery.counterup.js"></script>
+	<script src="assets/js/theme.js"></script>
 </body>
 
 </html>

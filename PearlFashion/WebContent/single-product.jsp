@@ -54,11 +54,11 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active">
-										<a class="nav-link" href="index.jsp">Home</a>
+										<a class="nav-link" href="HomeProductsServlet">Home</a>
 									</li>
 								
 										<li class="nav-item">
-											<a href="cart.jsp" class="icons">
+											<a href="AddCartServlet" class="icons">
 												<i class="lnr lnr lnr-cart"></i>
 											</a>
 										</li>
@@ -84,8 +84,8 @@
 				<div class="banner_content text-center">
 					<h2>Single Product Page</h2>
 					<div class="page_link">
-						<a href="index.jsp">Home</a>
-						<a href="category.jsp">Category</a>
+						<a href="HomeProductsServlet">Home</a>
+						<a href="AddCartServlet">Category</a>
 						<a href="single-product.jsp">Product Details</a>
 					</div>
 				</div>

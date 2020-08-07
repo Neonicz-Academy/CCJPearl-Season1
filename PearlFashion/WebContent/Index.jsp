@@ -56,11 +56,11 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active">
-										<a class="nav-link" href="index.jsp">Home</a>
+										<a class="nav-link" href="HomeProductsServlet">Home</a>
 									</li>
 									
 									<li class="nav-item">
-										<a href="cart.jsp" class="icons" >
+										<a href="AddCartServlet" class="icons" >
 											<i class="lnr lnr lnr-cart"></i><span class="cart-items"></span>
 										</a>
 									</li>
@@ -114,7 +114,7 @@
 						<div class="col-lg-3 col-md-3 col-sm-6">
 							<div class="f_p_item">
 								<div class="f_p_img">
-									<img class="img-fluid" src="img/product/<%= product.get("image") %>" alt="">
+									<img class="img-fluid" src="assets/img/product/<%= product.get("image") %>" alt="">
 									<div class="p_icon">
 										
 										<a href="cart.jsp">
