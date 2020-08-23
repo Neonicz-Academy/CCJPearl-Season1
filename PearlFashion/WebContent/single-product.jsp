@@ -98,22 +98,7 @@
 	<div class="product_image_area">
 		<div class="container">
 			<div class="row s_product_inner">
-			
-				<div class="col-lg-6">
-					<div class="s_product_img">
-						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-							
-							<div class="carousel-inner">
-								<div class="carousel-item active">
-									<img class="d-block w-100" src="assets/img/product/feature-product/f-p-1.jpg" alt="First slide">
-								</div>
-								
-								
-							</div>
-						</div>
-					</div>
-				</div>
-								<%
+										<%
 	Map<String, String> products = (Map<String, String>) request.getAttribute("productDetail");
 	if(products==null){
 	%>
@@ -124,6 +109,21 @@
 	} else{
 		
 	%>
+				<div class="col-lg-6">
+					<div class="s_product_img">
+						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+							
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img class="d-block w-100" src="http://localhost:8080/PearlFashion/ProductDetailImageServlet?productId=<%= products.get("productId") %>" alt="First slide">
+								</div>
+								
+								
+							</div>
+						</div>
+					</div>
+				</div>
+	
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
 						<h3><%= products.get("productName") %></h3>

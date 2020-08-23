@@ -114,7 +114,7 @@
 						<div class="col-lg-3 col-md-3 col-sm-6">
 							<div class="f_p_item">
 								<div class="f_p_img">
-									<img class="img-fluid" src="assets/img/product/<%= product.get("image") %>" alt="">
+									<img class="img-fluid" src="http://localhost:8080/PearlFashion/GetProductsImageServlet?productId=<%= product.get("productId") %>"  alt="">
 									<div class="p_icon">
 										
 										<a href="cart.jsp">
@@ -126,7 +126,7 @@
 									</h4><%= product.get("productName") %></h4>
 								</a> 
 								<h5><%= product.get("price") %></h5>
-								<div> <%= product.get("productId") %> </div>
+							<div> <%= product.get("productId") %> </div>
 							</div>
 						</div>
 						<%

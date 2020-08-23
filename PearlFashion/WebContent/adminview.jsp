@@ -40,7 +40,7 @@
 			<div class="container-fluid">
 				<div class="float-right">
 					<ul class="right_side">
-						<li><a href="LoginServlet"> LOGOUT </a></li>
+						<li><a href="loginServlet"> LOGOUT </a></li>
 
 					</ul>
 				</div>

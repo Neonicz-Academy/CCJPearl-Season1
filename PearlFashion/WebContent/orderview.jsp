@@ -137,7 +137,7 @@
 								
 								<td>
 									<div class="r-md-3">
-										<img class="img-fluid" src="assets/img/product/feature-product/f-p-1.jpg" alt="" height="100" width="100">	
+										<img class="img-fluid" src="http://localhost:8080/PearlFashion/ListOrderImageServlet?productId=<%= product.get("productId") %>" alt="" height="100" width="100">	
 									</div>
 								</td>
 								<td>

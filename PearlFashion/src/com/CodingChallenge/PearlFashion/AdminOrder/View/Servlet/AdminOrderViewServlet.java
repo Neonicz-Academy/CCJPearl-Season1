@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.CodingChallenge.PearlFashion.AdminOrder.View.Repositorie.AdminOrderViewRepository;
 import com.CodingChallenge.PearlFashion.Home.Products.Repositories.HomeProductRepository;
@@ -34,14 +35,20 @@ public class AdminOrderViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		AdminOrderViewRepository productRepository = new AdminOrderViewRepository();
-		List<Map<String, String>> productList = productRepository.selectAllOrders();
-		request.setAttribute("productList", productList);
-		response.getWriter().append("Served at:").append(request.getContextPath());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/adminview.jsp");
-        
-	       dispatcher.forward(request, response);
+       HttpSession session = request.getSession(true);
+       session.setAttribute("name", "Priyanka");
+       Boolean authorized= (Boolean) session.getAttribute("isauthorized");
+       RequestDispatcher serve = null;
+       if(authorized!= null && authorized) {
+    	   serve = request.getRequestDispatcher("adminview.jsp");
+    	   AdminOrderViewRepository productRepository = new AdminOrderViewRepository();
+   		List<Map<String, String>> productList = productRepository.selectAllOrders();
+   		request.setAttribute("productList", productList);
+       }else {
+    	   serve = request.getRequestDispatcher("login.jsp");
+       }
+		
+	       serve.forward(request, response);
 	}
 
 	/**
