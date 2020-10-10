@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.CodingChallenge.PearlFashion.Home.Products.Repositories.productImageRepository;
+import com.CodingChallenge.PearlFashion.Home.Products.Repositories.HomeImageRepository;
 import com.CodingChallenge.PearlFashion.Product.Detail.Repositories.ProductDetailImageRepository;
 
 /**
@@ -43,7 +43,8 @@ public class ProductDetailImageServlet extends HttpServlet {
         for (int data; (data = bis.read()) > -1;) {
           output.write(data);
           output.flush();
-        } 
+        }
+	
 	}
 
 	/**

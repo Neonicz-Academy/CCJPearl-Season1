@@ -22,24 +22,12 @@ import com.CodingChallenge.PearlFashion.AdminOrder.View.Repositorie.AdminOrderVi
 import com.CodingChallenge.PearlFashion.Login.Repositories.LoginRepository;
 import com.CodingChallenge.PearlFashion.Product.Detail.Repositories.ProductDetailRepository;
 
-/**
- * Servlet implementation class LoginServlet
- */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher serve = null;
 		HttpSession session = request.getSession(true);
@@ -53,14 +41,10 @@ public class LoginServlet extends HttpServlet {
 			 serve.forward(request, response);
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		
-		String userNameByUser= request.getParameter("userName");
+		String userNameByUser = request.getParameter("userName");
 		String passwordByUser = request.getParameter("password");
 		System.out.println("User Name:>" + userNameByUser);
 		System.out.println("User password:>" + passwordByUser);
@@ -68,9 +52,7 @@ public class LoginServlet extends HttpServlet {
 		LoginRepository adminRepository = new LoginRepository();
 		boolean login = adminRepository.checkAdmin(userNameByUser, passwordByUser);
 		if(login==true) {	
-			
 			System.out.println(login);
-			
 			System.out.println("Authenication Successful");
 			HttpSession session = request.getSession(true);
 			session.setAttribute("isauthorized", true);	
@@ -80,7 +62,6 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("Authentication failes");
 			request.setAttribute("failed", authenticationFailed);
 		}
-		
 		 doGet(request, response);
 
 	}

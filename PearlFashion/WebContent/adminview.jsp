@@ -40,7 +40,7 @@
 			<div class="container-fluid">
 				<div class="float-right">
 					<ul class="right_side">
-						<li><a href="loginServlet"> LOGOUT </a></li>
+						<li><a href="LogoutServlet"> LOGOUT </a></li>
 
 					</ul>
 				</div>
@@ -68,10 +68,10 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active"><a class="nav-link"
-										href="adminview.html">Orders</a></li>
-									<li class="nav-item"><a href="productview.html"
+										href="AdminOrederViewServlet">Orders</a></li>
+									<li class="nav-item"><a href="ProductListServlet"
 										class="nav-link">Products</a></li>
-									<li class="nav-item"><a href="addpage.html"
+									<li class="nav-item"><a href="AddProductServlet"
 										class="nav-link">Add Products</a></li>
 
 
@@ -115,7 +115,7 @@
 							<div class="categories_text">
 								
 								<a class="white_bg_btn"
-									href="ListOrderServlet">View More</a>
+									href="ListOrderServlet?orderId=<%= product.get("orderId") %>">View More</a>
 								
 								<div class="border_line"></div>
 								<p>

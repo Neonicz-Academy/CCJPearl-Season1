@@ -3,6 +3,9 @@ package com.CodingChallenge.PearlFashion.Add.Product.Servlet;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
@@ -17,6 +21,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import com.CodingChallenge.PearlFashion.Add.Product.Repositories.AddProductRepository;
+import com.CodingChallenge.PearlFashion.Util.AuthUtil;
 
 /**
  * Servlet implementation class AddImageServlet
@@ -24,8 +29,7 @@ import com.CodingChallenge.PearlFashion.Add.Product.Repositories.AddProductRepos
 @WebServlet("/AddProductServlet")
 public class AddProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String UPLOAD_DIRECTORY = "C:\\Users\\KISHAN\\JavaImages";
-       
+	private final String UPLOAD_DIRECTORY = "C:\\Users\\PC\\PearlImg";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,15 +42,38 @@ public class AddProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at:").append(request.getContextPath());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("addpage.jsp");
-        
-	       dispatcher.forward(request, response);
-	}
+		
+		RequestDispatcher serve = null;				
+		if(AuthUtil.isAuthenticated(request, response)) {
+			
+			
+			HttpSession session = request.getSession(true);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+			 if((null != request.getAttribute("inserted")) && (request.getAttribute("inserted").equals("success")))
+			 { 
+				 serve = request.getRequestDispatcher("ProductListServlet"); 
+			} 
+			 else 
+			 { 
+				 serve =request.getRequestDispatcher("addpage.jsp");
+			}
+	
+			
+	
+			/*
+			 * RequestDispatcher dispatcher = null; if((null !=
+			 * request.getAttribute("inserted")) &&
+			 * (request.getAttribute("inserted").equals("success"))) { dispatcher =
+			 * request.getRequestDispatcher("ProductListServlet"); } else { dispatcher =
+			 * request.getRequestDispatcher("addpage.jsp"); }
+			 */	
+		}
+		else {
+			serve = request.getRequestDispatcher("accessdenied.jsp");
+		}
+		serve.forward(request, response);
+		
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String image = null;
 		String productName = null;
@@ -123,6 +150,8 @@ public class AddProductServlet extends HttpServlet {
 		} else {
 			request.setAttribute("message", "Sorry this Servlet only handles file upload request"); 
 		}
+		
+		request.setAttribute("inserted", "success");
 		doGet(request, response);
 	}
 

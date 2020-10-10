@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,9 +18,12 @@ public class invoiceRepository {
 		List<Map<String,String>> products = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/pearlfashion_db";
-			con = DriverManager.getConnection(url, "root", "pass12345");
-			PreparedStatement stmt = con.prepareStatement(selectProductsQuery);
+			String url = "jdbc:mysql://139.59.93.240:3306/pearlfashion_db";
+			con = DriverManager.getConnection(url, "pearladmin", "pearl2020@CCJ");
+			//String url = "jdbc:mysql://localhost:3306/pearlfashion_db";
+			//con = DriverManager.getConnection(url, "root", "system");
+			PreparedStatement stmt = con.prepareStatement(selectProductsQuery, Statement.RETURN_GENERATED_KEYS);
+			//PreparedStatement stmt = con.prepareStatement(selectProductsQuery);
 			ResultSet rs = stmt.executeQuery();
 			products = new ArrayList<Map<String,String>>();
 			System.out.println("Product Length Before :> "+ products.size());

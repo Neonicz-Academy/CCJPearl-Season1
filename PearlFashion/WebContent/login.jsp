@@ -33,7 +33,7 @@
 				<div class="float-right">
 					<ul class="right_side">
 						<li>
-							<a href="p_login.html">
+							<a href="loginServlet">
 								Login
 						</li>
 						
@@ -60,18 +60,14 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active">
-										<a class="nav-link" href="#">Orders</a>
-									</li>
-									<li class="nav-item submenu dropdown">
-										<a href="#" class="nav-link">Products</a>
-										
-									</li>
-									<li class="nav-item submenu dropdown">
-										<a href="#" class="nav-link">Add Products</a>
-										
+										<a class="nav-link" href="home">Home</a>
 									</li>
 									
-											
+									<li class="nav-item">
+										<a href="CreateOrderServlet" class="icons" >
+											<i class="lnr lnr lnr-cart"></i><span class="cart-items"></span>
+										</a>
+									</li>											
 								</ul>
 							</div>
 
@@ -91,8 +87,8 @@
 				<div class="banner_content text-center">
 					<h2>Login</h2>
 					<div class="page_link">
-						<a href="index.html">Home</a>
-						<a href="p_login.html">Login</a>
+						<!-- <a href="index.html">Home</a>
+						<a href="p_login.html">Login</a> -->
 					</div>
 				</div>
 			</div>
@@ -128,7 +124,7 @@
  							<input type="text" class="form-control"  name="userName" placeholder="User Name" required>
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control"  name="password" placeholder="Password" required>
+								<input type="password" class="form-control"  name="password" placeholder="Password" required>
 							</div>
 							<div class="col-md-12 form-group">
 									
@@ -151,21 +147,21 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/popper.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/lightbox/simpleLightbox.min.js"></script>
-	<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-	<script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-	<script src="vendors/isotope/isotope-min.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="vendors/jquery-ui/jquery-ui.js"></script>
-	<script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendors/counter-up/jquery.counterup.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="assets/js/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/popper.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/stellar.js"></script>
+	<script src="assets/vendors/lightbox/simpleLightbox.min.js"></script>
+	<script src="assets/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="assets/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+	<script src="assets/vendors/isotope/isotope-min.js"></script>
+	<script src="assets/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="assets/js/jquery.ajaxchimp.min.js"></script>
+	<script src="assets/js/mail-script.js"></script>
+	<script src="assets/vendors/jquery-ui/jquery-ui.js"></script>
+	<script src="assets/vendors/counter-up/jquery.waypoints.min.js"></script>
+	<script src="assets/vendors/counter-up/jquery.counterup.js"></script>
+	<script src="assets/js/theme.js"></script>
 </body>
 
 </html>

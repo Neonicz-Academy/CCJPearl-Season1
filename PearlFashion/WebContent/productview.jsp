@@ -1,4 +1,6 @@
 <!doctype html>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <html lang="en">
 
 <head>
@@ -8,17 +10,17 @@
 	<link rel="icon" href="img/favicon.png" type="image/png">
 	<title>PEARL FASHION</title>
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="vendors/linericon/style.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-	<link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
-	<link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
-	<link rel="stylesheet" href="vendors/animate-css/animate.css">
-	<link rel="stylesheet" href="vendors/jquery-ui/jquery-ui.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/vendors/linericon/style.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/vendors/owl-carousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="assets/vendors/lightbox/simpleLightbox.css">
+	<link rel="stylesheet" href="assets/vendors/nice-select/css/nice-select.css">
+	<link rel="stylesheet" href="assets/vendors/animate-css/animate.css">
+	<link rel="stylesheet" href="assets/vendors/jquery-ui/jquery-ui.css">
 	<!-- main css -->
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 
 <body>
@@ -33,7 +35,7 @@
 				<div class="float-right">
 					<ul class="right_side">
 						<li>
-							<a href="login.html">
+							<a href="LogoutServlet">
 								LOGOUT
 							</a>
 						</li>
@@ -65,14 +67,14 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active">
-										<a class="nav-link" href="adminview.html">Orders</a>
+										<a class="nav-link" href="AdminOrderViewServlet">Orders</a>
 									</li>
 									<li class="nav-item submenu dropdown">
-										<a href="productview.html" class="nav-link" >Products</a>
+										<a href="ProductListServlet" class="nav-link" >Products</a>
 										
 										</li>
 										<li class="nav-item">
-											<a href="addpage.html" class="nav-link">Add Products</a>
+											<a href="AddProductServlet" class="nav-link">Add Products</a>
 											
 										</li>
 										
@@ -89,87 +91,27 @@
 	<!--================Header Menu Area =================-->
 
 	
-
-	<!--================Order Details Area =================-->
+<!--================Order Details Area =================-->
 	<section class="order_details p_120">
 		<div class="container">
-			<!--<h3 class="title_confirmation">Thank you. Your order has been received.</h3>-->
-			<!--<div class="row order_d_inner">
-				<div class="col-lg-4">
-					<div class="details_item">
-						<h4>Order Info</h4>
-						<ul class="list">
-							<li>
-								<a href="#">
-									<span>Order number</span> : 60235</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Date</span> : Los Angeles</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Total</span> : USD 2210</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Payment method</span> : Check payments</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="details_item">
-						<h4>Billing Address</h4>
-						<ul class="list">
-							<li>
-								<a href="#">
-									<span>Street</span> : 56/8</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>City</span> : Los Angeles</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Country</span> : United States</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Postcode </span> : 36952</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="details_item">
-						<h4>Shipping Address</h4>
-						<ul class="list">
-							<li>
-								<a href="#">
-									<span>Street</span> : 56/8</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>City</span> : Los Angeles</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Country</span> : United States</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Postcode </span> : 36952</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div> -->
+		
 			<div class="order_details_table">
-				<h2>Product view</h2>
+				<h1>Product view</h1>
 				<div> <!--<div  class="table-responsive">-->
-				<form class="row login_form" action="p_del_edit.html" method="post" id="contactForm" novalidate="novalidate">
-	
+				<form class="row login_form" action="ProductListServlet" method="post" id="contactForm" novalidate="novalidate">
+	<%
+	List<Map<String, String>> productList = (List<Map<String, String>>) request.getAttribute("productList");
+	if(productList == null)
+	{
+	%>
+	 	 <div>
+	   		No products found
+	   	</div>
+	<%
+	} 
+	else
+	{
+	%>
 					<table class="table">
 						<thead>
 							<tr>
@@ -186,119 +128,60 @@
 							</tr>
 						</thead>
 						<tbody>
+						<%
+						 for(Map<String, String> row : productList)
+						 {
+						%>
 							<tr>
 								<td>
 									<div class="r-md-3">
-										<img class="img-fluid" src="img/product/feature-product/f-p-1.jpg" alt="" height="100" width="100">	
+									
+									
+										<img class="img-fluid" src="http://localhost:8080/PearlFashion/ProductListImageServlet?productId=<%= row.get("productId") %>" alt="" height="100" width="100">	
 									</div>
 								</td>
 								<td>
-									<h5>A001</h5>
+									<h5><%= row.get("productId") %></h5>
 								</td>
 								<td>
-									<p>Jeans</p>
+									<p><%= row.get("productName") %></p>
 									
 								</td>
 								<td>
-									<p>32</p>
+									<p><%= row.get("size") %></p>
 								</td>
 								<td>
-									<p>Rs.720.00</p>
+									<p><%= row.get("price") %></p>
 								</td>
 								<td>
-									<p>levis</p>
+									<p><%= row.get("brandName") %></p>
 								</td>
 								<td>
-									<p>Green</p>
+									<p><%= row.get("colour") %></p>
 								</td>
 								<td>
-									<a class="main_btn" href="deletedit.html">Edit</a>
-                                    <a class="main_btn" href="deletedit.html">Delete</a>
-								</td>
-								
-							</tr>
-							<tr>
-								<td>
-									<div class="r-md-3">
-										<img class="img-fluid" src="img/product/feature-product/f-p-2.jpg" alt="" height="100" width="100">	
-									</div>								</td>
-								<td>
-									<h5>P003</h5>
-								</td>
-								<td>
-									<p>Modern suit</p>
 									
-								</td>
-								<td>
-									<p>XXL</p>
-								</td>
-								<td>
-									<p>Rs.1500.00</p>
-								</td>
-								<td>
-									<p>Raymond</p>
-								</td>
-								<td>
-									<P>Blue</p>
-								</td>
-								<td>
-									<a class="main_btn" href="deletedit.html">Edit</a>
-                                    <a class="main_btn" href="deletedit.html">Delete</a>
+                                    <%-- <a class="main_btn" href="UpdateServlet?productId=<%= row.get("productId") %>">EDIT</a> --%>
+									<a class="main_btn" href="DeleteServlet?productId=<%= row.get("productId") %>">DELETE</a>
 								</td>
 								
 							</tr>
-							<tr>
-								<td>
-									<div class="r-md-3">
-										<img class="img-fluid" src="img/product/feature-product/f-p-3.jpg" alt="" height="100" width="100">	
-									</div>								</td>
-								<td>
-									<h5>L010</h5>
-								</td>
-								<td>
-									<p>Baby suit</p>
-									
-								</td>
-								<td>
-									<p>small</p>
-								</td>
-								<td>
-									<p>Rs.1000.00</p>
-								</td>
-								<td>
-									<p>babyhug</p>
-								</td>
-								<td>
-									<p>peach</p>
-								</td>
-								<td>
-									<a class="main_btn" href="deletedit.html">Edit</a>
-                                    <a class="main_btn" href="deletedit.html">Delete</a>
-								</td>
-								
-							</tr>
-						
-							                                                      
+							<%
+								 }
+							%>
+								                                                      
 						</tbody>
 					</table>
-					<form>
-					<!--<div class="card_area">
-							<a class="main_btn" href="#">Accept the order</a>
-							<a class="icon_btn" href="#">
-								<i class="lnr lnr lnr-heart"></i>
-							</a>
-							<a class="main_btn" href="#">Reject</a>
-							<a class="icon_btn" href="#">
-								<i class="lnr lnr lnr-diamond"></i>
-								
-							</a>
-						</div>-->
+					<%
+						}
+					%>
+					</form>
+					
 				</div>
 			</div>
 		</div>
 		
-	</section>
-	<!--================End Order Details Area =================-->
+	</section>	<!--================End Order Details Area =================-->
 
 
 	

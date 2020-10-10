@@ -26,8 +26,10 @@ public class AddProductRepository {
 			dateFormat2.setTimeZone(TimeZone.getTimeZone("GMT"));
 			java.sql.Date timeNow = new java.sql.Date(new java.util.Date().getTime());
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/pearlfashion_db";
-			con = DriverManager.getConnection(url, "root", "pass12345");
+			String url = "jdbc:mysql://139.59.93.240:3306/pearlfashion_db";
+			con = DriverManager.getConnection(url, "pearladmin", "pearl2020@CCJ");
+			//String url = "jdbc:mysql://localhost:3306/pearlfashion_db";
+			//con = DriverManager.getConnection(url, "root", "system");
 			String insertProductQuery = "INSERT INTO product_details(image,productName,size,price,brandName,colour,createdDate,updatedDate,createdBy,updatedBy)"+
 					"VALUES (?,?,?,?,?,?,?,?,?,?)"; 
 					

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.CodingChallenge.PearlFashion.Home.Products.Repositories.productImageRepository;
+//import com.CodingChallenge.PearlFashion.Home.Products.Repositories.productImageRepository;
 import com.CodingChallenge.PearlFashion.List.Order.Repositories.ListOrderImageRepository;
 
 /**

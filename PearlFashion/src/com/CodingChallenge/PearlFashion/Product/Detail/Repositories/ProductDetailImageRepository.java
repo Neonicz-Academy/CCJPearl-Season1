@@ -7,13 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProductDetailImageRepository {
+
 	public  String getImagePath(Long productId) {
 		Connection con = null;
 		String images = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/pearlfashion_db";
-			con = DriverManager.getConnection(url,"root","pass12345");
+			String url = "jdbc:mysql://139.59.93.240:3306/pearlfashion_db";
+			con = DriverManager.getConnection(url, "pearladmin", "pearl2020@CCJ");
+			//String url = "jdbc:mysql://localhost:3306/pearlfashion_db";
+			//con = DriverManager.getConnection(url,"root","system");
 			String viewImage = "SELECT image FROM product_details WHERE productId=?";				
 			PreparedStatement stmt = con.prepareStatement(viewImage);
 			stmt.setDouble(1, productId);
@@ -46,5 +49,6 @@ public class ProductDetailImageRepository {
 		
 		return images;
 	}
+
 
 }

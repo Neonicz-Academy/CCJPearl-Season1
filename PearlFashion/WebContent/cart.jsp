@@ -49,8 +49,9 @@
 						data-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"
 						aria-label="Toggle navigation">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
+						<span class="icon-bar"></span> 
+						<span class="icon-bar"></span> 
+						<span class="icon-bar"></span>
 					</button>
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset"
@@ -59,11 +60,9 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active"><a class="nav-link"
-										href="HomeProductsServlet">Home</a></li>
+										href="home">Home</a></li>
 								</ul>
 							</div>
-
-
 						</div>
 					</div>
 				</div>
@@ -79,7 +78,7 @@
 				<div class="banner_content text-center">
 					<h2>Shopping Cart</h2>
 					<div class="page_link">
-						<a href="HomeProductsServlet">Home</a> <a href="AddCartServlet">Cart</a>
+						<!-- <a href="HomeProductsServlet">Home</a> <a href="AddCartServlet">Cart</a> -->
 					</div>
 				</div>
 			</div>
@@ -89,7 +88,6 @@
 
 	<!--================Cart Area =================-->
 	<section class="cart_area"> 
-	<form class="row login_form" action="CreateOrderServlet" method="post" id="addOrderproduct">
 		<div class="container">
 			<div class="cart_inner">
 				<div class="table-responsive">
@@ -102,111 +100,69 @@
 								<th scope="col">Total</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-							<%
-	Map<String, String> products = (Map<String, String>) request.getAttribute("productDetail");
-	if(products==null){
-	%>
-	   <div>
-	   No products found
-	   </div>
-	<% 
-	} else{
-		
-	%> 
-								<td>
-									<div class="media">
-										<div class="d-flex">
-											<img src="assets/img/product/feature-product/f-p-2.jpg"
-												alt="">
-										</div>
-										<div class="media-body">
-											<p><%= products.get("productName") %></p>
-										</div>
-									</div>
-								</td>
-								<td>
-									<h5><%= products.get("price") %></h5>
-								</td>
-								<td>
-								
-									<div class="product_count">
-										<input type="text" name="qty" id="sst" maxlength="12"
-											value="1" title="Quantity:" class="input-text qty">
-										<button
-											onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-											class="increase items-count" type="submit">
-											<i class="lnr lnr-chevron-up"></i>
-										</button>
-										<button
-											onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-											class="reduced items-count" type="button">
-											<i class="lnr lnr-chevron-down"></i>
-										</button>
-									</div>
-									
-								</td>
-								<td>
-									<h5><%= products.get("total")  %></h5>
-								</td>
-							</tr>
-
-
+						<tbody id="productContainer">
+							
 							<tr class="bottom_button">
-
 								<td></td>
 								<td></td>
-
 							</tr>
 							<tr>
 								<td></td>
 								<td></td>
-		<% 
-		}
-	//}
-		%>
-		 					<td>
-
+		 						<td>
 									<h5>Subtotal</h5>
 								</td>
 								<td> 
 								<!-- Long total += products.get("price"); -->
-									<h5><%= products.get("subTotal") %></h5>
+									<h5 id="subtotal">subtotal</h5>
 								</td>
 							</tr>
-
 							<tr class="out_button_area">
 								<td></td>
 								<td></td>
 								<td></td>
-
-								<td>
-									<div class="checkout_btn_inner">
-										<a class="gray_btn" href="Index.jsp">Continue Shopping</a> 
-											<input type="submit" value="Proceed To CheckOut" class="btn submit_btn"></input>
-									</div>
-								</td>
+								<td></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-
+				<div class="checkout_btn_inner">
+					
+					<div>
+					<form class="login_form" action="CreateOrderServlet" method="post" id="addOrder">
+						<div class="row">
+							<div class="col-md-4">
+							Name: <input type="text" name="customerName" placeholder="Type Your Name" required="required">
+							</div>
+							<div class="col-md-4">
+							Mobile: <input type="tel" name="mobile" placeholder="Your contact Number" required="required">
+							</div>
+							<div class="col-md-4">
+							Address: <input type="text" name="address" placeholder="Your Address">
+							</div>
+						</div>
+						<div class="row p-2">
+							<input type="hidden" class="form-control" id="cartItems" name="cart">
+							<input type="hidden" class="form-control" id="grandTotal" name="grandTotal">
+							<div class="col-md-12">
+								<a class="gray_btn" href="${pageContext.request.contextPath}">Continue Shopping</a>  <input type="submit" value="Proceed To CheckOut" class="btn submit_btn"></input>
+							</div>
+						</div>
+					</form>
+					</div>
+				</div>
 			</div>
 		</div>
-		</form>
 	</section>
 	<!--================End Cart Area =================-->
-
-
 
 	<!----------- Footer ------------>
 	<footer class="footer-bs">
 		<div class="row">
 			<div class="col-md-6 footer-brand animated fadeInLeft">
-				<h2>Logo</h2>
-				<a class="navbar-brand logo_h" href="index.html"> <img
-					src="img/logo.png" alt="">
+				<h2>PEARL FASHIONS</h2>
+				<a class="navbar-brand logo_h" href="index.html"> 
+				<img src="assets/img/logo.png" alt="">
 				</a>
 				<p>
 					Always deliver more than expected. <br>We see our customer as
@@ -214,25 +170,21 @@
 					day to make every important aspects of the customer experience a
 					little bit better.
 				</p>
-				<p>Â© 2014 BS3 UI Kit, All rights reserved</p>
+				<p>© 2014 BS3 UI Kit, All rights reserved</p>
 			</div>
 			<div class="col-md-4 footer-nav animated fadeInUp">
-
 				<div class="col-md-6">
 					<ul class="list">
 						<li><a href="#">Contact Us</a></li>
 						<li><a href="#">pearlfashion@gmail.com</a></li>
 						<li><a href="#">Call Us : 9380090124</a></li>
-
 					</ul>
 				</div>
 			</div>
-
-
 		</div>
 		<section style="text-align: center; margin: 10px auto;">
 			<p>
-				Designed by <a href="http://enfoplus.net">Prince J. Sargbah</a>
+				 <a href="http://enfoplus.net"></a>
 			</p>
 		</section>
 	</footer>
@@ -245,22 +197,95 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/popper.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/lightbox/simpleLightbox.min.js"></script>
-	<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-	<script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-	<script src="vendors/isotope/isotope-min.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="vendors/jquery-ui/jquery-ui.js"></script>
-	<script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendors/counter-up/jquery.counterup.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="assets/js/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/popper.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/stellar.js"></script>
+	<script src="assets/vendors/lightbox/simpleLightbox.min.js"></script>
+	<script src="assets/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="assets/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+	<script src="assets/vendors/isotope/isotope-min.js"></script>
+	<script src="assets/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="assets/js/jquery.ajaxchimp.min.js"></script>
+	<script src="assets/js/mail-script.js"></script>
+	<script src="assets/vendors/jquery-ui/jquery-ui.js"></script>
+	<script src="assets/vendors/counter-up/jquery.waypoints.min.js"></script>
+	<script src="assets/vendors/counter-up/jquery.counterup.js"></script>
+	<script src="assets/js/theme.js"></script>
 	<script src="assets/js/script.js" async></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+
+	$(document).ready(function(){
+		var myCookie = getCookie("cartCookie");
+		document.getElementById('cartItems').value = myCookie;
+    	if((myCookie != null) && (myCookie != ''))
+    	{
+    		var jsonObject = JSON.parse(myCookie);
+      		var res = []; 
+      		var subTotal = 0;
+       		for(var i in jsonObject) 
+           		{
+				var cartItems = jsonObject[i]; 
+				for(var item in cartItems) 
+           		{
+							var row = '<tr>'+
+							'<td>'+
+								'<div class="media">'+
+									'<div class="d-flex">'+
+									'<img src="http://localhost:8080/PearlFashion/HomeImageServlet?productId='+cartItems[item].productId+'" alt="">'+
+										//'<img src="'+cartItems[item].image+'" alt="">'+
+									'</div>'+
+									'<div id="productNameContainer">'+
+									'</div>'+
+									'<div  id="pNameDiv" class="media-body">'+
+										'<p>'+cartItems[item].name+'</p>'+
+									'</div>'+
+								'</div>'+
+							'</td>'+
+							'<td>'+
+								'<h5>'+cartItems[item].price+'</h5>'+
+							'</td>'+
+							'<td>'+
+								'<div class="product_count">'+
+									'<input type="text" name="qty" id="sst" maxlength="12" value="'+cartItems[item].qty+'" title="Quantity:" class="input-text qty">'+
+								'</div>'+
+							'</td>'+
+							'<td>'+
+								'<h5>'+cartItems[item].TotalPrice+'</h5>'+
+							'</td>'+
+						'</tr>';
+					subTotal = subTotal + cartItems[item].TotalPrice;
+					$("#productContainer").prepend(row);
+           		}	
+				$('#subtotal').text(subTotal);
+				document.getElementById('grandTotal').value = subTotal;
+    	}		
+
+  		}
+        
+		});
+
+	function getCookie(cartCookie) 
+	{
+		  var name = cartCookie + "=";
+		  var decodedCookie = decodeURIComponent(document.cookie);
+		  var ca = decodedCookie.split(';');
+		  for(var i = 0; i <ca.length; i++)
+			{
+		    	var c = ca[i];
+		   		 while (c.charAt(0) == ' ')
+			   	 {
+		     		 c = c.substring(1);
+		   		 }
+		   		 if (c.indexOf(name) == 0)
+			   	 {
+		      		return c.substring(name.length, c.length);
+		   		 }
+		 	}
+		  return "";
+	}
+	</script>
 </body>
 
 </html>

@@ -13,14 +13,20 @@ import java.util.function.Function;
 
 public class HomeProductRepository {
 
+	public static void main(String[] args) {
+		//selectAllProducts();
+	}
+	
 	public List<Map<String, String>> selectAllProducts(){
 		Connection con = null;
 		String selectProductsQuery = "SELECT * FROM product_details";
 		List<Map<String,String>> products = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/pearlfashion_db";
-			con = DriverManager.getConnection(url, "root", "pass12345");
+			String url = "jdbc:mysql://139.59.93.240:3306/pearlfashion_db";
+			con = DriverManager.getConnection(url, "pearladmin", "pearl2020@CCJ");
+			//String url = "jdbc:mysql://localhost:3306/pearlfashion_db";
+			//con = DriverManager.getConnection(url, "root", "system");
 			PreparedStatement stmt = con.prepareStatement(selectProductsQuery);
 			ResultSet rs = stmt.executeQuery();
 			products = new ArrayList<Map<String,String>>();
@@ -52,6 +58,7 @@ public class HomeProductRepository {
 		}
 		finally {
 			try {
+				if(con != null)
 				con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();

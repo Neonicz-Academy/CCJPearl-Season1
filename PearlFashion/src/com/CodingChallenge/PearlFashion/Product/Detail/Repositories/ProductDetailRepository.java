@@ -19,8 +19,10 @@ public class ProductDetailRepository {
 			Map<String, String> product = null;
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				String url = "jdbc:mysql://localhost:3306/pearlfashion_db";
-				con = DriverManager.getConnection(url, "root", "pass12345");
+				//String url = "jdbc:mysql://localhost:3306/pearlfashion_db";
+				//con = DriverManager.getConnection(url, "root", "system");
+				String url = "jdbc:mysql://139.59.93.240:3306/pearlfashion_db";
+				con = DriverManager.getConnection(url, "pearladmin", "pearl2020@CCJ");
 				PreparedStatement stmt = con.prepareStatement(selectProductQuery);
 				stmt.setLong(1, productId);
 				ResultSet rs = stmt.executeQuery();
@@ -67,5 +69,6 @@ public class ProductDetailRepository {
 
 
 	}
+
 
 

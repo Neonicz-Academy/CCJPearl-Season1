@@ -16,7 +16,7 @@ import com.CodingChallenge.PearlFashion.Home.Products.Repositories.HomeProductRe
 /**
  * Servlet implementation class HomeProductsServlet
  */
-@WebServlet("/HomeProductsServlet")
+@WebServlet("/home")
 public class HomeProductsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

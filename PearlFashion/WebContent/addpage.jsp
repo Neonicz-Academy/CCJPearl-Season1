@@ -34,7 +34,7 @@
 				</div>
 				<div class="float-right">
 					<ul class="right_side">
-						<li><a href="login.html"> LOGOUT </a></li>
+						<li><a href="LogoutServlet"> LOGOUT </a></li>
 					</ul>
 				</div>
 			</div>
@@ -61,8 +61,8 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active"><a class="nav-link"
-										href="OrderDetailServlet">Orders</a></li>
-									<li class="nav-item"><a href="ProductDetailServlet"
+										href="AdminOrderViewServlet">Orders</a></li>
+									<li class="nav-item"><a href="ProductListServlet"
 										class="nav-link">Products</a>
 									</li>
 									<li class="nav-item">
@@ -80,10 +80,10 @@
 	<div class="order_details_table">
 	<h1>Add Product</h1>
 	<div>
-		<form class="row login_form" action="AddProductServlet" method="post" enctype="multipart/form-data">
+		<form class="row login_form" action="AddProductServlet" method="post" id="addproduct" enctype="multipart/form-data">
 			<table class="table">
 				<tbody>
-					<tr>
+					<tr></div>
  			 			<div class="table-responsive">
 							<div class="col-md-3"></div>
 							<div class="table-responsive">
@@ -195,7 +195,7 @@
 							</div>
 						</tr>
 						<tr>
-						
+						</div>
 						<div class="table-responsive">
 							<div class="col-md-3"></div>
 							<div class="table-responsive">
@@ -259,6 +259,38 @@
 </div>
 	</section>
 	
+	<!----------- Footer ------------>
+				<footer class="footer-bs">
+					<div class="row">
+						<div class="col-md-6 footer-brand animated fadeInLeft">
+							<h2>PEARL FASHION</h2>
+							<a class="navbar-brand logo_h" href="index.html">
+								<img src="assets/img/logo.png" alt="">
+							</a>
+							<p>Always deliver more than expected.
+								<br>We see our customer as invited guests to a party, and we are the hosts. It's our job every day to make every important aspects of the customer experience a little bit better.</p>
+							<p>© 2014 BS3 UI Kit, All rights reserved</p>
+						</div>
+						<div class="col-md-4 footer-nav animated fadeInUp">
+							
+							<div class="col-md-6">
+								<ul class="list">
+									<li><a href="#">Contact Us</a></li>
+									<li><a href="#">pearlfashion@gmail.com</a></li>
+									<li><a href="#">Call Us : 9380090124</a></li>
+									
+								</ul>
+							</div>
+						</div>
+						
+						
+					</div>
+					<section style="text-align:center; margin:10px auto;"><p><a href="http://enfoplus.net"></a></p></section>
+				</footer>
+
+			</div>
+			<!--End of footer------------------------------------->
+    
 	
 	<!--================End Order Details Area =================-->
 	€‹
@@ -272,13 +304,13 @@
 	<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
 	<script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
 	<script src="vendors/isotope/isotope-min.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="vendors/jquery-ui/jquery-ui.js"></script>
-	<script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendors/counter-up/jquery.counterup.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="assets/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="assets/js/jquery.ajaxchimp.min.js"></script>
+	<script src="assets/js/mail-script.js"></script>
+	<script src="assets/vendors/jquery-ui/jquery-ui.js"></script>
+	<script src="assets/vendors/counter-up/jquery.waypoints.min.js"></script>
+	<script src="assets/vendors/counter-up/jquery.counterup.js"></script>
+	<script src="assets/js/theme.js"></script>
 </body>
 €‹
 </html>

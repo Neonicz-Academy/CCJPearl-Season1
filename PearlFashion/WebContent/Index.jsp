@@ -25,6 +25,9 @@
 	<!-- main css -->
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/responsive.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 </head>
 
 <body>
@@ -56,13 +59,16 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active">
-										<a class="nav-link" href="HomeProductsServlet">Home</a>
+										<a class="nav-link" href="home">Home</a>
 									</li>
 									
 									<li class="nav-item">
-										<a href="AddCartServlet" class="icons" >
+										<a href="CreateOrderServlet" class="icons" >
 											<i class="lnr lnr lnr-cart"></i><span class="cart-items"></span>
 										</a>
+									</li>
+									<li class="nav-item active">
+										<a class="nav-link" href="login.jsp">Login</a>
 									</li>
 								</ul>
 							</div>
@@ -109,15 +115,21 @@
 	<% 
 	} else{
 		for(Map<String, String> product:products){
+			
 	%>
 		
 						<div class="col-lg-3 col-md-3 col-sm-6">
 							<div class="f_p_item">
 								<div class="f_p_img">
-									<img class="img-fluid" src="http://localhost:8080/PearlFashion/GetProductsImageServlet?productId=<%= product.get("productId") %>"  alt="">
+									<img class="img-fluid" src="http://localhost:8080/PearlFashion/HomeImageServlet?productId=<%= product.get("productId") %>">
+									
 									<div class="p_icon">
 										
-										<a href="cart.jsp">
+										<!-- <a href=#  onClick="addToCart(9,'frock',100);">
+											<i class="lnr lnr-cart"></i>
+										</a> -->
+										
+										<a href=#  onClick="addToCart('<%= product.get("image") %>',<%= product.get("productId") %>,'<%= product.get("productName") %>',<%= product.get("price") %>, 1);">
 											<i class="lnr lnr-cart"></i>
 										</a>
 									</div>
@@ -126,7 +138,7 @@
 									</h4><%= product.get("productName") %></h4>
 								</a> 
 								<h5><%= product.get("price") %></h5>
-							<div> <%= product.get("productId") %> </div>
+								<div> <%= product.get("productId") %> </div>
 							</div>
 						</div>
 						<%
@@ -148,13 +160,13 @@
 				<footer class="footer-bs">
 					<div class="row">
 						<div class="col-md-6 footer-brand animated fadeInLeft">
-							<h2>Logo</h2>
+							<h2>PEARL FASHION</h2>
 							<a class="navbar-brand logo_h" href="index.html">
-								<img src="img/logo.png" alt="">
+								<img src="assets/img/logo.png" alt="">
 							</a>
 							<p>Always deliver more than expected.
 								<br>We see our customer as invited guests to a party, and we are the hosts. It's our job every day to make every important aspects of the customer experience a little bit better.</p>
-							<p>Â© 2014 BS3 UI Kit, All rights reserved</p>
+							<p>© 2014 BS3 UI Kit, All rights reserved</p>
 						</div>
 						<div class="col-md-4 footer-nav animated fadeInUp">
 							
@@ -170,7 +182,7 @@
 						
 						
 					</div>
-					<section style="text-align:center; margin:10px auto;"><p>Footer Designed by <a href="http://enfoplus.net">Prince J. Sargbah</a></p></section>
+					<section style="text-align:center; margin:10px auto;"><p> <a href="http://enfoplus.net"></a></p></section>
 				</footer>
 
 			</div>
@@ -192,14 +204,66 @@
 	<script src="assets/vendors/owl-carousel/owl.carousel.min.js"></script>
 	<script src="assets/js/jquery.ajaxchimp.min.js"></script>
 	<script src="assets/vendors/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendors/flipclock/timer.js"></script>
-	<script src="vendors/counter-up/jquery.counterup.js"></script>
+	<script src="assets/vendors/flipclock/timer.js"></script>
+	<script src="assets/vendors/counter-up/jquery.counterup.js"></script>
 	<script src="assets/js/mail-script.js"></script>
 	<script src="assets/js/theme.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="assets/js/script.js"></script>
+  <script>
+  		var cart = {"cartItems":[]};
+  		function addToCart(image, id, name, price, quantity)
+  		{
+  			//alert("qty::::"+quantity);
+  			var myCookie = getCookie("cartCookie");
+  		    if((myCookie !== null) && (myCookie !== ''))
+  		    {
+  		    	 cart = JSON.parse(myCookie);
+  		  	}
+  			
+  			var TotalPrice=0;
+  			TotalPrice += quantity*price;
+  		    if(cart.cartItems.some(function(o){return o["productId"] === id;}))
+  		       {
+  		            var position;
+  		            cart.cartItems.forEach( (product, index) => {
+  		            	if(product["productId"] === id){
+  		            		position = index;
+  		            	}
+  		            });
+  		            cart.cartItems[position].qty = parseInt(cart.cartItems[position].qty) + parseInt(quantity);
+  		          	cart.cartItems[position].TotalPrice = parseInt(cart.cartItems[position].TotalPrice) + parseInt(TotalPrice);
+  		        } 
+  		    	else
+  		            {
+  		                var p = {image:image, productId:id, name:name, price: price, qty:quantity, TotalPrice:TotalPrice};
+  		                cart.cartItems.push(p);
+  		            }
+  		    document.cookie="cartCookie="+JSON.stringify(cart);
+  			return;
+  		}
+  		
+function getCookie(cartCookie) {
+	  var name = cartCookie + "=";
+	  var decodedCookie = decodeURIComponent(document.cookie);
+	  var ca = decodedCookie.split(';');
+	  for(var i = 0; i <ca.length; i++)
+		{
+	  		var c = ca[i];
+	  		while (c.charAt(0) == ' ') 
+			{
+	     		 c = c.substring(1);
+	   		 }
+	  		if (c.indexOf(name) == 0) 
+			{
+	      		return c.substring(name.length, c.length);
+	   		 }
+	  }
+	  return "";
+}
+</script>
 </body>
 
 </html>

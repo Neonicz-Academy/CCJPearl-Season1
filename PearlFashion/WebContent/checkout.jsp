@@ -95,12 +95,12 @@
 	<section class="checkout_area section_gap">
 		<div class="container">
 			
-			
+			<form class="" action="confirmation.jsp" method="post" id="">
 			<div class="billing_details">
 				<div class="row">
 					<div class="col-lg-8">
 						<h3>Billing Details</h3>
-						<form class="row contact_form" action="confIrmation.html" method="post">
+						<form class="row contact_form" action="InvoiceServlet" method="post">
 							<div class="col-md-6 form-group p_star">
 								<input type="text" class="form-control" id="first" name="name" placeholder="First name" required>
 								<!--<span class="placeholder" data-placeholder="First name"></span>-->
@@ -125,7 +125,7 @@
 								<!--<span class="placeholder" data-placeholder="Email Address"></span>-->
 							</div>
 							<div class="col-md-12 form-group p_star">
-								<select class="country_select" required>
+								<select class="country_select"  id="country" required>
 								<option value="1">Select Country</option>
 									<option value="1">INDIA</option>
 									
@@ -144,7 +144,7 @@
 								<!--<span class="placeholder" data-placeholder="Town/City"></span>-->
 							</div>
 							<div class="col-md-12 form-group p_star">
-								<select class="country_select" required>
+								<select id="country"class="country_select" required>
 								<option value="1">Select District</option>
 									<option value="1">TVM</option>
 									<option value="2">KOLLAM</option>
@@ -166,7 +166,7 @@
 							</div>
 							
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="main_btn">Order</button>
+								<button type="submit" value="submit" class="main_btn" onClick="customerDetails(document.getElementById('city').value , document.getElementById('city').value, document.getElementById('country').value ,document.getElementById('zip').value );">Order</button>
 							</div>
 							
 							
@@ -195,6 +195,12 @@
 		for(Map<String, String> product:products){
 	%>
 								<li>
+									<a href="#"><%= product.get("productName") %>
+										<span class="middle"><%= product.get("quantity") %></span>
+										<span class="last"><%= product.get("total") %></span>
+									</a>
+								</li>
+								<!-- <li>
 									<a href="#">Long Sleeve TShirt
 										<span class="middle">x 01</span>
 										<span class="last">150.00</span>
@@ -205,13 +211,7 @@
 										<span class="middle">x 01</span>
 										<span class="last">150.00</span>
 									</a>
-								</li>
-								<li>
-									<a href="#">Long Sleeve TShirt
-										<span class="middle">x 01</span>
-										<span class="last">150.00</span>
-									</a>
-								</li>
+								</li -->>
 							</ul>
 <%
 		}
@@ -240,6 +240,7 @@
 					</div>
 				</div>
 			</div>
+			</form>
 		</div>
 	</section>
 	<!--================End Checkout Area =================-->
@@ -282,21 +283,59 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/popper.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/lightbox/simpleLightbox.min.js"></script>
-	<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-	<script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-	<script src="vendors/isotope/isotope-min.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="vendors/jquery-ui/jquery-ui.js"></script>
-	<script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendors/counter-up/jquery.counterup.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="assets/js/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/popper.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="vjs/stellar.js"></script>
+	<script src="assets/vendors/lightbox/simpleLightbox.min.js"></script>
+	<script src="assets/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="assets/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+	<script src="assets/vendors/isotope/isotope-min.js"></script>
+	<script src="assets/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="assets/js/jquery.ajaxchimp.min.js"></script>
+	<script src="assets/js/mail-script.js"></script>
+	<script src="assets/vendors/jquery-ui/jquery-ui.js"></script>
+	<script src="assets/vendors/counter-up/jquery.waypoints.min.js"></script>
+	<script src="assets/vendors/counter-up/jquery.counterup.js"></script>
+	<script src="assets/js/theme.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+//var user = $.cookie("userInfo");
+function customerDetails(street,city,country,zip){
+	alert("cookie is ready---------");
+	console.log("Called>>>>>>>>>>>>>>>>>>");
+	var myCookie = getCookie("userCookie");
+	document.cookie="userCookie="+JSON.stringify(myCookie);
+	var p = { street:street,city:city, country:country,zip:zip};
+	var jsonObject = JSON.parse(p);
+	return;
+	/* var res;
+	res.push(jsonObject);
+	res.push(user); 
+	document.cookie="userCookie="+JSON.stringify(res);
+	console.log(user.userInfo); */
+}
+           function getCookie(userCookie) {
+	  var name = userCookie + "=";
+	  var decodedCookie = decodeURIComponent(document.cookie);
+	  var ca = decodedCookie.split(';');
+	  for(var i = 0; i <ca.length; i++)
+		{
+	  		var c = ca[i];
+	  		while (c.charAt(0) == ' ') 
+			{
+	     		 c = c.substring(1);
+	   		 }
+	  		if (c.indexOf(name) == 0) 
+			{
+	      		return c.substring(name.length, c.length);
+	   		 }
+	  }
+	  return "";
+}
+</script>
+	
 </body>
 
 </html>

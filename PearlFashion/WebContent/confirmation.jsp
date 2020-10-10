@@ -55,7 +55,7 @@
 							<div class="col-lg-7 pr-0">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item active">
-										<a class="nav-link" href="HomeProductsServlet">Home</a>
+										<a class="nav-link" href="home">Home</a>
 									</li>
 									
 										<li class="nav-item">
@@ -84,8 +84,8 @@
 				<div class="banner_content text-center">
 					<h2>Order Confirmation</h2>
 					<div class="page_link">
-						<a href="HomeProductsServlet">Home</a>
-						<a href="confirmation.html">Confirmation</a>
+						<!-- <a href="HomeProductsServlet">Home</a>
+						<a href="confirmation.html">Confirmation</a> -->
 					</div>
 				</div>
 			</div>
@@ -97,78 +97,43 @@
 	<section class="order_details p_120">
 		<div class="container">
 			<h3 class="title_confirmation">Thank you. Your order has been received.</h3>
-			<div class="row order_d_inner">
+			<div class="row order_d_inner" id="OrderDetailsContainer">
 	
 				<div class="col-lg-4">
 					<div class="details_item">
 						<h4>Order Info</h4>
 						<ul class="list">
+						<%
+	Map<String, String> order = (Map<String, String>) request.getAttribute("order");
+	if(order==null){
+	%>
+	   <div>
+	   No products found
+	   </div>
+	<% 
+	} else{
+	%>
 							<li>
 								<a href="#">
-									<span>Order number</span> : 60235</a>
+									<span>Order number</span> : <%= order.get("orderId") %></a>
 							</li>
 							<li>
 								<a href="#">
-									<span>Date</span> : Los Angeles</a>
+									<span>Date</span> : <%= order.get("orderDate") %></a>
 							</li>
 							<li>
 								<a href="#">
-									<span>Total</span> : USD 2210</a>
+									<span>Total</span> :<%= order.get("grandTotal") %></a>
 							</li>
-							<li>
-								<a href="#">
-									<span>Payment method</span> : Check payments</a>
-							</li>
+							<%
+		}
+%>
 						</ul>
 					</div>
 				</div>
-				<div class="col-lg-4">
-					<div class="details_item">
-						<h4>Billing Address</h4>
-						<ul class="list">
-							<li>
-								<a href="#">
-									<span>Street</span> : 56/8</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>City</span> : Los Angeles</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Country</span> : United States</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Postcode </span> : 36952</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="details_item">
-						<h4>Shipping Address</h4>
-						<ul class="list">
-							<li>
-								<a href="#">
-									<span>Street</span> : 56/8</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>City</span> : Los Angeles</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Country</span> : United States</a>
-							</li>
-							<li>
-								<a href="#">
-									<span>Postcode </span> : 36952</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-		
+				
+				
+		</div>
 			</div>
 			<div class="order_details_table">
 				<h2>Order Details</h2>
@@ -178,6 +143,7 @@
 							<tr>
 								<th scope="col">Product</th>
 								<th scope="col">Quantity</th>
+								<th scope="col">Price</th>
 								<th scope="col">Total</th>
 							</tr>
 						</thead>
@@ -198,38 +164,20 @@
 									<p><%=  product.get("productName") %></p>
 								</td>
 								<td>
-									<h5>x1 </h5>
+									<h5>x<%=  product.get("quantity") %> </h5>
 								</td>
 								<td>
 									<p><%= product.get("price") %></p>
+								</td>
+								<td>
+									<p><%= product.get("total") %></p>
 								</td>
 							</tr>
 <%
 		}
 	}
+	if(order!=null){
 %>
-							<!-- <tr>
-								<td>
-									<p>Long Sleeve TShirt</p>
-								</td>
-								<td>
-									<h5>x 01</h5>
-								</td>
-								<td>
-									<p>150.00</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<p>Long Sleeve TShirt</p>
-								</td>
-								<td>
-									<h5>x 01</h5>
-								</td>
-								<td>
-									<p>150.00</p>
-								</td>
-							</tr> -->
 							<tr>
 								<td>
 									<h4>Subtotal</h4>
@@ -238,7 +186,7 @@
 									<h5></h5>
 								</td>
 								<td>
-									<p>450.00</p>
+									<p><%= order.get("grandTotal") %></p>
 								</td>
 							</tr>
 							<tr>
@@ -258,9 +206,12 @@
 									<h5></h5>
 								</td>
 								<td>
-									<p>450.00</p>
+									<p><%= order.get("grandTotal") %></p>
 								</td>
 							</tr>
+	<%
+	}
+	%>
 						</tbody>
 	
 					</table>
@@ -278,9 +229,9 @@
 				<footer class="footer-bs">
 					<div class="row">
 						<div class="col-md-6 footer-brand animated fadeInLeft">
-							<h2>Logo</h2>
+							<h2>PEARL FASHION</h2>
 							<a class="navbar-brand logo_h" href="index.html">
-								<img src="img/logo.png" alt="">
+								<img src="assets/img/logo.png" alt="">
 							</a>
 							<p>Always deliver more than expected.
 								<br>We see our customer as invited guests to a party, and we are the hosts. It's our job every day to make every important aspects of the customer experience a little bit better.</p>
@@ -300,7 +251,7 @@
 						
 						
 					</div>
-					<section style="text-align:center; margin:10px auto;"><p>Designed by <a href="http://enfoplus.net">Prince J. Sargbah</a></p></section>
+					<section style="text-align:center; margin:10px auto;"><p><a href="http://enfoplus.net"></a></p></section>
 				</footer>
 				
 			
@@ -324,6 +275,14 @@
 	<script src="assets/vendors/counter-up/jquery.waypoints.min.js"></script>
 	<script src="assets/vendors/counter-up/jquery.counterup.js"></script>
 	<script src="assets/js/theme.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		document.cookie = "cartCookie" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	});
+	</script>
+	
 </body>
 
 </html>
